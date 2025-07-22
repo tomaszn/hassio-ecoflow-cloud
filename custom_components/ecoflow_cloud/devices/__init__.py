@@ -209,14 +209,17 @@ class BaseDevice(ABC):
                 return json.loads(payload)
             except UnicodeDecodeError as error:
                 _LOGGER.warning(f"UnicodeDecodeError: {error}. Trying to load json.")
+                _LOGGER.debug(f"Raw data: {raw_data}")
                 return json.loads(raw_data)
             except Exception as error:
                 _LOGGER.warning(f"Exception: {error}. Trying to load json.")
+                _LOGGER.debug(f"Raw data: {raw_data}")
                 return json.loads(raw_data)
         except Exception as error1:
             _LOGGER.error(
                 f"constant: {error1}. Ignoring message and waiting for the next one."
             )
+            _LOGGER.debug(f"Raw data: {raw_data}")
             return {}
 
 
